@@ -20,6 +20,14 @@ import com.avaje.ebean.annotation.CreatedTimestamp;
 public class Post {
 
 
+    private static final String POSTED_AT_FIELD = "postedAt";
+
+    private static final String POSTED_AT_FIELD_ASC = POSTED_AT_FIELD + " asc";
+
+    private static final String POSTED_AT_FIELD_DESC = POSTED_AT_FIELD + " desc";
+
+    private static final String AUTHOR_FIELD = "author";
+
     @Id
     private Long id;
 
@@ -83,35 +91,35 @@ public class Post {
 
     public Post previous() {
         return Ebean.find(Post.class)
-                .fetch("author")
+                .fetch(AUTHOR_FIELD)
                 .where()
-                .lt("postedAt", this.postedAt)
-                .orderBy("postedAt desc")
+                .lt(POSTED_AT_FIELD, this.postedAt)
+                .orderBy(POSTED_AT_FIELD_DESC)
                 .setMaxRows(1)
                 .findUnique();
     }
 
     public Post next() {
         return Ebean.find(Post.class)
-                .fetch("author")
+                .fetch(AUTHOR_FIELD)
                 .where()
-                .gt("postedAt", this.postedAt)
-                .orderBy("postedAt asc")
+                .gt(POSTED_AT_FIELD, this.postedAt)
+                .orderBy(POSTED_AT_FIELD_ASC)
                 .setMaxRows(1)
                 .findUnique();
     }
 
     public static List<Post> findRecent(int maxrows) {
         return Ebean.find(Post.class)
-                .fetch("author")
-                .orderBy("postedAt desc")
+                .fetch(AUTHOR_FIELD)
+                .orderBy(POSTED_AT_FIELD_DESC)
                 .setMaxRows(maxrows)
                 .findList();
     }
 
     public static Post findById(long id) {
         return Ebean.find(Post.class)
-                .fetch("author")
+                .fetch(AUTHOR_FIELD)
                 .where()
                 .eq("id", id)
                 .findUnique();

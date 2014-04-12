@@ -13,10 +13,12 @@ import com.google.inject.Singleton;
 @Singleton
 public class Bootstrap {
 
+    private static final String DEFAULT_PASSWORD = "secret";
+
     @Start(order = 90)
     public void startService() throws IOException {
-        User user1 = new User("tarou@test.com", "secret", "Tarou");
-        User user2 = new User("suzuki@test.com", "secret", "Suzuki");
+        User user1 = new User("tarou@test.com", DEFAULT_PASSWORD, "Tarou");
+        User user2 = new User("suzuki@test.com", DEFAULT_PASSWORD, "Suzuki");
 
         Ebean.save(user1);
         Ebean.save(user2);
