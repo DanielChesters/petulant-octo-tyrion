@@ -41,3 +41,6 @@ pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.next
 release.properties
+/testdatabase:tests.h2.db
+/default-create.sql
+/default-drop.sql
