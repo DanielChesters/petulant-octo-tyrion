@@ -1,6 +1,5 @@
 package models;
 
-import java.nio.charset.Charset;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
@@ -14,32 +13,58 @@ import com.avaje.ebean.annotation.CreatedTimestamp;
 
 @Entity
 public class Comment {
-	private static final Charset ENCODING = Charset.forName("UTF-8");
-
 	@Id
-	public Long id;
+	private Long id;
 
 
-	public String author;
+	private String author;
 
 	@CreatedTimestamp
-	public Timestamp postedAt;
+	private Timestamp postedAt;
 
 	@Lob
-	public final byte[] content;
+	private final String content;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "post_id")
-	public final Post post;
+	private final Post post;
 
 	public Comment(String author, String content, Post post) {
 		this.author = author;
-		this.content = content.getBytes(ENCODING);
+		this.content = content;
 		this.post = post;
 	}
 
 	public String getContent() {
-		return new String(this.content, ENCODING);
+		return content;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public Timestamp getPostedAt() {
+		return postedAt;
+	}
+
+	public void setPostedAt(Timestamp postedAt) {
+		this.postedAt = postedAt;
+	}
+
+	public Post getPost() {
+		return post;
 	}
 
 }

@@ -7,16 +7,11 @@ import models.Post;
 import models.User;
 import ninja.lifecycle.Start;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.avaje.ebean.Ebean;
 import com.google.inject.Singleton;
 
 @Singleton
 public class Bootstrap {
-
-	private static final Logger log = LoggerFactory.getLogger(Bootstrap.class);
 
 	@Start(order = 90)
 	public void startService() throws IOException {

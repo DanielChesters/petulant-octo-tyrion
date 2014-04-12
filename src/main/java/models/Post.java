@@ -1,6 +1,5 @@
 package models;
 
-import java.nio.charset.Charset;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,31 +20,57 @@ import com.avaje.ebean.annotation.CreatedTimestamp;
 public class Post {
 
 
-	private static final Charset ENCODING = Charset.forName("UTF-8");
-
 	@Id
-	public Long id;
+	private Long id;
 
-	public final String title;
+	private final String title;
 
 	@CreatedTimestamp
-	public Timestamp postedAt;
+	private Timestamp postedAt;
 
 	@Lob
-	private final byte[] content;
+	private final String content;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
-	public final User author;
+	private final User author;
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-	public List<Comment> comments;
+	private List<Comment> comments;
 
 	public Post(User author, String title, String content) {
-		this.content = content.getBytes(ENCODING);
+		this.content = content;
 		this.title = title;
 		this.author = author;
 		this.comments = new ArrayList<Comment>();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Timestamp getPostedAt() {
+		return postedAt;
+	}
+
+	public void setPostedAt(Timestamp postedAt) {
+		this.postedAt = postedAt;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
 	}
 
 	public Post addComment(String author, String content) {
@@ -93,6 +118,6 @@ public class Post {
 	}
 
 	public String getContent() {
-		return new String(content, ENCODING);
+		return content;
 	}
 }

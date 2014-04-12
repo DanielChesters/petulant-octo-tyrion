@@ -29,18 +29,12 @@ import ninja.validation.Length;
 import ninja.validation.Required;
 import ninja.validation.Validation;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.collect.Maps;
 import com.google.inject.Singleton;
 
 
 @Singleton
 public class ApplicationController {
-
-	public Logger logger = LoggerFactory.getLogger(ApplicationController.class);
-
 
     public Result index() {
     	List<Post> posts = Post.findRecent(11);
@@ -50,21 +44,6 @@ public class ApplicationController {
     	map.put("olderPosts", posts);
 
         return Results.html().render(map);
-
-    }
-
-    public Result helloWorldJson() {
-
-        SimplePojo simplePojo = new SimplePojo();
-        simplePojo.content = "Hello World! Hello Json!";
-
-        return Results.json().render(simplePojo);
-
-    }
-
-    public static class SimplePojo {
-
-        public String content;
 
     }
 
@@ -88,8 +67,6 @@ public class ApplicationController {
 			@Param("content") @Required @Length(min = 1) String content,
 			Validation validation,
 			FlashScope flashScope) {
-
-		logger.info("post comment : " + content);
 
 		Map<String, Object> map = getPostMap(postId);
 
