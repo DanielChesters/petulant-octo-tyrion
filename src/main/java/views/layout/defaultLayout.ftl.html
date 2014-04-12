@@ -14,7 +14,6 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="/assets/webjars/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
-
     <!-- Latest compiled and minified JavaScript -->
 
     <style type="text/css">
@@ -24,6 +23,7 @@
       }
     </style>
 
+	<link href="/assets/css/custom.css" rel="stylesheet">
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,9 +33,21 @@
 
   <body>
 
-    <div class="container">
-
-        <#include "header.ftl.html"/>
+    <div id="header">
+            <div id="logo">
+            	yabe.
+            </div>
+            <ul id="tools">
+                <li>
+                    <a href="#">Log in to write something</a>
+                </li>
+            </ul>
+            <div id="title">
+                <span class="about">About this blog</span>
+                <h1><a href="/">Yet another blog</a></h1>
+                <h2>We won't write about anything</h2>
+            </div>
+        </div>
 
         <#if (flash.error)??>
             <div class="alert alert-danger">
@@ -49,16 +61,17 @@
             </div>
         </#if>
 
-        <#nested/>
+        <div id="main">
+            <#nested/>
+        </div>
 
-        <#include "footer.ftl.html"/>
-
-    </div> <!-- /container -->
+        <p id="footer">
+            Yabe is a (not that) powerful blog engine built with the
+            <a href="http://www.ninjaframework.org/">Ninja framework</a>
+            as a tutorial application.
+        </p>
 
     <script type="text/javascript" src="/assets/webjars/tinymce-jquery/4.0.16/tinymce.min.js" ></script>
-    <script>
-		tinymce.init({selector:'textarea'});
-	</script>
     <script src="/assets/webjars/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>
