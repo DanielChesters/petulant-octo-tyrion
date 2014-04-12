@@ -37,50 +37,50 @@ import com.google.inject.Singleton;
 public class ApplicationController {
 
     public Result index() {
-    	List<Post> posts = Post.findRecent(11);
-    	Post frontPost = posts.isEmpty() ? null : posts.remove(0);
-    	Map<String, Object> map = Maps.newHashMap();
-    	map.put("frontPost", frontPost);
-    	map.put("olderPosts", posts);
+        List<Post> posts = Post.findRecent(11);
+        Post frontPost = posts.isEmpty() ? null : posts.remove(0);
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("frontPost", frontPost);
+        map.put("olderPosts", posts);
 
         return Results.html().render(map);
 
     }
 
     public Result show(@PathParam("id") Long id) {
-    	return Results.html().render(getPostMap(id));
+        return Results.html().render(getPostMap(id));
     }
 
     private Map<String, Object> getPostMap(Long id) {
-    	Map<String, Object> map = Maps.newHashMap();
-    	Post post = Post.findById(id);
-    	map.put("post", post);
+        Map<String, Object> map = Maps.newHashMap();
+        Post post = Post.findById(id);
+        map.put("post", post);
 
-    	map.put("previous", post.previous());
-    	map.put("next", post.next());
+        map.put("previous", post.previous());
+        map.put("next", post.next());
 
-		return map;
-	}
+        return map;
+    }
 
-	public Result postComment(@PathParam("postId") Long postId,
-			@Param("author") @Required @Length(min = 1) String author,
-			@Param("content") @Required @Length(min = 1) String content,
-			Validation validation,
-			FlashScope flashScope) {
+    public Result postComment(@PathParam("postId") Long postId,
+            @Param("author") @Required @Length(min = 1) String author,
+            @Param("content") @Required @Length(min = 1) String content,
+            Validation validation,
+            FlashScope flashScope) {
 
-		Map<String, Object> map = getPostMap(postId);
+        Map<String, Object> map = getPostMap(postId);
 
-		if (validation.hasViolations()) {
-			flashScope.error("All fields are required!");
-			map.put("author", author);
-			map.put("content", content);
-		} else {
-			Post post = Post.findById(postId);
-			post.addComment(author, content);
-			flashScope.success(String.format("Thanks for posting %s", author));
+        if (validation.hasViolations()) {
+            flashScope.error("All fields are required!");
+            map.put("author", author);
+            map.put("content", content);
+        } else {
+            Post post = Post.findById(postId);
+            post.addComment(author, content);
+            flashScope.success(String.format("Thanks for posting %s", author));
 
-		}
+        }
 
-    	return Results.html().template("views/ApplicationController/show.ftl.html").render(map);
+        return Results.html().template("views/ApplicationController/show.ftl.html").render(map);
     }
 }

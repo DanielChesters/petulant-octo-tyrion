@@ -26,8 +26,8 @@ public class Module extends AbstractModule {
 
 
     protected void configure() {
-    	install(new NinjaEbeanModule());
-    	bind(Bootstrap.class);
+        install(new NinjaEbeanModule());
+        bind(Bootstrap.class);
     }
 
 }
