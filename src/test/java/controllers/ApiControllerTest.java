@@ -47,7 +47,7 @@ public class ApiControllerTest extends NinjaTest {
         String result = ninjaTestBrowser.makeRequest(getServerAddress() + "/show/1");
 
         assertTrue(result.contains("Scala Programming Language"));
-        assertTrue(result.contains(" I knew that ... "));
+        assertTrue(result.contains("I knew that ... "));
     }
 
     @Test
