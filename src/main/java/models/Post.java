@@ -1,5 +1,6 @@
 package models;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +18,9 @@ import com.avaje.ebean.Ebean;
 import com.avaje.ebean.annotation.CreatedTimestamp;
 
 @Entity
-public class Post {
+public class Post implements Serializable {
 
+    private static final long serialVersionUID = 1L;
 
     private static final String POSTED_AT_FIELD = "postedAt";
 

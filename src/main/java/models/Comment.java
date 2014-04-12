@@ -1,5 +1,6 @@
 package models;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
@@ -12,7 +13,10 @@ import javax.persistence.ManyToOne;
 import com.avaje.ebean.annotation.CreatedTimestamp;
 
 @Entity
-public class Comment {
+public class Comment implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     private Long id;
 
