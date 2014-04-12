@@ -16,6 +16,12 @@ public class User {
     private final String fullname;
     private boolean isAdmin;
 
+    public User(String email, String password, String fullname) {
+        this.email = email;
+        this.password = password;
+        this.fullname = fullname;
+    }
+
 
     public Long getId() {
         return id;
@@ -49,13 +55,6 @@ public class User {
 
     public String getFullname() {
         return fullname;
-    }
-
-
-    public User(String email, String password, String fullname) {
-        this.email = email;
-        this.password = password;
-        this.fullname = fullname;
     }
 
 
