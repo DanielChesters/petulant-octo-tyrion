@@ -57,16 +57,8 @@ public class Post {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Timestamp getPostedAt() {
         return postedAt;
-    }
-
-    public void setPostedAt(Timestamp postedAt) {
-        this.postedAt = postedAt;
     }
 
     public String getTitle() {

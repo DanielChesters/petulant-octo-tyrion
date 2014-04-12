@@ -28,18 +28,8 @@ public class User {
     }
 
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
     public boolean isAdmin() {
         return isAdmin;
-    }
-
-
-    public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
     }
 
 
